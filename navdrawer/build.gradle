@@ -1,0 +1,140 @@
+/*
+ * Copyright 2015 Alexander Oprisnik
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 21
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+}
+
+version = '1.0.0'
+group = 'com.oprisnik'
+ext.libName = 'navdrawer'
+ext.githubUrl = 'https://github.com/oprisnik/navdrawer'
+ext.developerId = 'oprisnik'
+ext.developerName = 'Alexander Oprisnik'
+ext.bintrayRepo = 'maven'
+
+
+bintray {
+    def Properties props = new Properties()
+    def File file = file("../local.properties")
+    if (file.exists()) {
+        props.load(new FileInputStream(file))
+        user = props['bintrayUser']
+        key = props['bintrayApiKey']
+    } else {
+        println 'local.properties not found! No bintray user / key set!'
+    }
+
+    configurations = ['archives']
+//    dryRun = false
+//    publish = true
+    pkg {
+        repo = bintrayRepo
+        name = libName
+        desc = 'Android navigation drawer library'
+        websiteUrl = githubUrl
+        issueTrackerUrl = githubUrl+'/issues'
+        vcsUrl = githubUrl + '.git'
+        licenses = ['Apache-2.0']
+        publicDownloadNumbers = true
+    }
+
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name libName
+                url githubUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                    }
+                }
+                scm {
+                    connection githubUrl+'.git'
+                    developerConnection githubUrl+'.git'
+                    url githubUrl+'.git'
+                }
+            }
+        }
+    }
+}
+
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//
+//artifacts {
+//    archives javadocJar
+//    archives sourcesJar
+//}
+//
+//task findConventions << {
+//    println project.getConvention()
+//}

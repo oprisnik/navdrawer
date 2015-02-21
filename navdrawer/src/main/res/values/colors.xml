@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2015 Alexander Oprisnik
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!--<color name="navdrawer_statusbar_color">?attr/colorPrimary</color>-->
+    <color name="navdrawer_background">#fafafa</color>
+    <color name="navdrawer_text_color">@color/abc_primary_text_material_light</color>
+    <color name="navdrawer_subheader_color">@color/abc_secondary_text_material_light</color>
+    <!--<color name="navdrawer_text_color_selected">?attr/colorPrimary</color>-->
+    <color name="navdrawer_icon_tint">#808080</color>
+    <!--<color name="navdrawer_icon_tint_selected">?attr/colorPrimary</color>-->
+    <color name="navdrawer_divider">#1F000000</color>
+
+    <color name="navdrawer_item_selected_bg">#11000000</color>
+    <color name="navdrawer_inset_foreground">#4000</color>
+
+</resources>
