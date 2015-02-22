@@ -16,6 +16,8 @@
 
 package com.oprisnik.navdrawer;
 
+import com.oprisnik.navdrawer.entry.NavDrawerEntry;
+
 import java.util.List;
 
 public interface NavDrawerDataProvider {

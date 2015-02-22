@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-package com.oprisnik.navdrawer;
+package com.oprisnik.navdrawer.entry;
 
 import android.support.annotation.StringRes;
 
-public class NavDrawerSettingsEntry extends NavDrawerEntry {
+import com.oprisnik.navdrawer.R;
 
-    public NavDrawerSettingsEntry(@StringRes int settingsStringRes) {
-        super(settingsStringRes, R.drawable.ic_settings_black_24dp);
+public class NavDrawerSubheader extends NavDrawerEntry {
+
+    public NavDrawerSubheader(@StringRes int titleResId) {
+        super(titleResId, 0, R.layout.navdrawer_subheader);
+    }
+
+    @Override
+    public boolean isClickable() {
+        return false;
     }
 }

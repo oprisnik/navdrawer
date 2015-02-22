@@ -24,13 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oprisnik.navdrawer.NavDrawerActivity;
-import com.oprisnik.navdrawer.NavDrawerDivider;
-import com.oprisnik.navdrawer.NavDrawerDividerBeforeSubheader;
-import com.oprisnik.navdrawer.NavDrawerEntry;
-import com.oprisnik.navdrawer.NavDrawerSettingsEntry;
-import com.oprisnik.navdrawer.NavDrawerSubheader;
-import com.oprisnik.navdrawer.NavDrawerSupportEntry;
-import com.oprisnik.navdrawer.widget.NavDrawerLayout;
+import com.oprisnik.navdrawer.entry.NavDrawerDivider;
+import com.oprisnik.navdrawer.entry.NavDrawerDividerBeforeSubheader;
+import com.oprisnik.navdrawer.entry.NavDrawerEntry;
+import com.oprisnik.navdrawer.entry.NavDrawerSettingsEntry;
+import com.oprisnik.navdrawer.entry.NavDrawerSubheader;
+import com.oprisnik.navdrawer.entry.NavDrawerSupportEntry;
 
 import java.util.ArrayList;
 import java.util.List;

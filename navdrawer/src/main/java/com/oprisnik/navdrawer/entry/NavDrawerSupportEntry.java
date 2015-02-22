@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.oprisnik.navdrawer;
+package com.oprisnik.navdrawer.entry;
 
 import android.support.annotation.StringRes;
+
+import com.oprisnik.navdrawer.R;
 
 public class NavDrawerSupportEntry extends NavDrawerEntry {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.oprisnik.navdrawer;
+package com.oprisnik.navdrawer.entry;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.oprisnik.navdrawer.R;
 import com.oprisnik.navdrawer.widget.NavDrawerLayout;
 
 public class NavDrawerEntry {

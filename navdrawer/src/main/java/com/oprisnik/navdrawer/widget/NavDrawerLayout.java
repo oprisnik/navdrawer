@@ -29,7 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oprisnik.navdrawer.NavDrawerDataProvider;
-import com.oprisnik.navdrawer.NavDrawerEntry;
+import com.oprisnik.navdrawer.entry.NavDrawerEntry;
 import com.oprisnik.navdrawer.R;
 import com.oprisnik.navdrawer.Utils;
 

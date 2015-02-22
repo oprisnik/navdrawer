@@ -49,11 +49,12 @@ public abstract class NavDrawerActivity extends ActionBarActivity implements Nav
         super.onPostCreate(savedInstanceState);
 
         ViewGroup rootView = (ViewGroup) findViewById(android.R.id.content);
-        View drawer = rootView.getChildAt(0);
-        
-        // setup the drawer layout
-        if (drawer instanceof NavDrawerLayout) {
-            setupDrawerLayout((NavDrawerLayout) drawer);
+        if (rootView != null) {
+            View drawer = rootView.getChildAt(0);
+            // setup the drawer layout if we found it
+            if (drawer != null && drawer instanceof NavDrawerLayout) {
+                setupDrawerLayout((NavDrawerLayout) drawer);
+            }
         }
     }
 

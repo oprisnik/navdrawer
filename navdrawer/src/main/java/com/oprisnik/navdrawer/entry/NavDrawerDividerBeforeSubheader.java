@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.oprisnik.navdrawer;
+package com.oprisnik.navdrawer.entry;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oprisnik.navdrawer.R;
+import com.oprisnik.navdrawer.entry.NavDrawerDivider;
 import com.oprisnik.navdrawer.widget.NavDrawerLayout;
 
-public class NavDrawerDivider extends NavDrawerEntry {
-
-    @Override
-    public boolean isClickable() {
-        return false;
-    }
+public class NavDrawerDividerBeforeSubheader extends NavDrawerDivider {
 
     @Override
     public View createView(Context context, ViewGroup container, boolean selected,
                            final NavDrawerLayout.NavigationListener listener) {
-        return LayoutInflater.from(context).inflate(R.layout.navdrawer_divider, container, false);
+        return LayoutInflater.from(context).inflate(R.layout.navdrawer_divider_before_subheader, container, false);
     }
 }
