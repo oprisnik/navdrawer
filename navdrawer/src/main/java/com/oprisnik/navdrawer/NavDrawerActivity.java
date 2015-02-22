@@ -24,9 +24,12 @@ import android.annotation.TargetApi;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.oprisnik.navdrawer.widget.NavDrawerLayout;
 
@@ -39,6 +42,20 @@ public abstract class NavDrawerActivity extends ActionBarActivity implements Nav
     private ValueAnimator mStatusBarColorAnimator = null;
 
     protected boolean mUpNavigation = true;
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        ViewGroup rootView = (ViewGroup) findViewById(android.R.id.content);
+        View drawer = rootView.getChildAt(0);
+        
+        // setup the drawer layout
+        if (drawer instanceof NavDrawerLayout) {
+            setupDrawerLayout((NavDrawerLayout) drawer);
+        }
+    }
 
     public void setupDrawerLayout(NavDrawerLayout drawerLayout) {
         mDrawerLayout = drawerLayout;

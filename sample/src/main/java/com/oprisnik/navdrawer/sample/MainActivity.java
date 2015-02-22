@@ -122,10 +122,6 @@ public class MainActivity extends NavDrawerActivity {
             }
         });
 
-
-        // setup the drawer layout
-        setupDrawerLayout((NavDrawerLayout) findViewById(R.id.main));
-
         // we do not want the up arrow (<-) here
         showUpNavigation(false);
     }
