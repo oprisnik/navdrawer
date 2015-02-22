@@ -52,11 +52,11 @@ dependencies {
 
 version = '1.0.0'
 group = 'com.oprisnik'
-ext.libName = 'navdrawer'
-ext.githubUrl = 'https://github.com/oprisnik/navdrawer'
-ext.developerId = 'oprisnik'
-ext.developerName = 'Alexander Oprisnik'
-ext.bintrayRepo = 'maven'
+def libName = 'navdrawer'
+def githubUrl = 'https://github.com/oprisnik/navdrawer'
+def developerId = 'oprisnik'
+def developerName = 'Alexander Oprisnik'
+def bintrayRepo = 'maven'
 
 
 bintray {
@@ -115,26 +115,28 @@ install {
     }
 }
 
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
-//
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+// TODO: Javadoc not working
 //task javadoc(type: Javadoc) {
 //    source = android.sourceSets.main.java.srcDirs
 //    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 //}
-//
+
 //task javadocJar(type: Jar, dependsOn: javadoc) {
 //    classifier = 'javadoc'
 //    from javadoc.destinationDir
 //}
-//
-//artifacts {
+
+artifacts {
 //    archives javadocJar
-//    archives sourcesJar
-//}
-//
-//task findConventions << {
-//    println project.getConvention()
-//}
+    archives sourcesJar
+}
+
+
+task findConventions << {
+    println project.getConvention()
+}
