@@ -28,11 +28,11 @@ A small sample application can be found [here](sample).
 
 ## Usage
 
-Just add the dependency to your `build.gradle`:
+Just add the following dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-  compile 'com.oprisnik:navdrawer:1.0.0'
+  compile 'com.oprisnik:navdrawer:1.0.1'
 }
 ```
 
@@ -66,14 +66,14 @@ If you do not want to extend `NavDrawerActivity`, you can also take a look at [N
 The structure of the navigation drawer is a simple `List<NavDrawerEntry>` and there are several
 pre-defined elements available:
 
-* NavDrawerEntry - clickable entries consisting of text and an icon
-* NavDrawerSubheader - section header that is not clickable
-* NavDrawerDivider - simple horizontal divider
-* NavDrawerDividerBeforeSubheader - horizontal divider to be used right above a subheader (in order to have correct spacing)
-* NavDrawerSettingsEntry - Default settings entry
-* NavDrawerSupportEntry - Default support entry ("Help & feedback")
+* __NavDrawerEntry__ - clickable entries consisting of text and an icon
+* __NavDrawerSubheader__ - section header that is not clickable
+* __NavDrawerDivider__ - simple horizontal divider
+* __NavDrawerDividerBeforeSubheader__ - horizontal divider to be used right above a subheader (in order to have correct spacing)
+* __NavDrawerSettingsEntry__ - Default settings entry
+* __NavDrawerSupportEntry__ - Default support entry ("Help & feedback")
 
-For NavDrawerEntries, a builder interface is available. Example:
+For `NavDrawerEntries`, a builder interface is available. Example:
 
 ```java
 NavDrawerEntry e = new NavDrawerEntry.Builder()
@@ -115,11 +115,52 @@ There are also XML attributes that you can use to specify your header
 ```xml
 <com.oprisnik.navdrawer.widget.NavDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:drawer="http://schemas.android.com/apk/res-auto"
     ...
     drawer:hasHeader="true|false"
-    drawer:headerLayout="@layout/custom_header">
+    drawer:headerLayout="@layout/custom_header" />
+```
+
+## Toolbar
+
+If your activity has a `Toolbar`, the `NavDrawerActivity` can set up the drawer navigation for you (hamburger icon).
+In your activity, you can call the following method to enable / disable up navigation:
+
+```java
+showUpNavigation(boolean show)
+```
+
+If you enable up navigation, the up-arrow (<-) will be shown.
+Otherwise the hamburger icon is displayed and automatically handled.
+
+## Status bar color
+
+The navigation drawer library takes care of coloring the status bar for you.
+
+In order to get the correct behavior, you need to set the status bar color to transparent.
+The status bar will then be colored according to the `colorPrimaryDark` attribute.
+
+Example application theme:
+
+```xml
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+  <item name="colorPrimary">@color/primary</item>
+  <item name="colorPrimaryDark">@color/primary_dark</item>
+  
+  <!-- You need to set the status bar color to transparent!-->
+  <!-- It will be automatically colored according to colorPrimaryDark! -->
+  <item name="android:statusBarColor">@android:color/transparent</item>
+</style>
+```
+
+If you want to change the status bar color, the `NavDrawerActivity` provides the following methods:
+
+```java
+// set the status bar color to the given color
+public void setStatusBarBackgroundColor(int color)
+
+// animate the status bar color from fromColor to toColor
+public void animateStatusBarBackgroundColor(int fromColor, int toColor)
 ```
 
 ## Acknowledgements
