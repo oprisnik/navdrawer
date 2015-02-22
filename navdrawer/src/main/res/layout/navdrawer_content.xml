@@ -16,14 +16,6 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<ViewStub android:id="@+id/header_stub"-->
-    <!--android:inflatedId="@+id/header"-->
-    <!--android:layout="@layout/navdrawer_header"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <include layout="@layout/navdrawer_header"/>
-
     <LinearLayout
         android:id="@android:id/list"
         android:layout_width="match_parent"

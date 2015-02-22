@@ -110,6 +110,18 @@ getDrawerLayout().setDefaultHeader();
 
 If you use the default header, `onHeaderClicked()` will be called if the header is clicked by the user.
 
+There are also XML attributes that you can use to specify your header
+
+```xml
+<com.oprisnik.navdrawer.widget.NavDrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:drawer="http://schemas.android.com/apk/res-auto"
+    ...
+    drawer:hasHeader="true|false"
+    drawer:headerLayout="@layout/custom_header">
+```
+
 ## Acknowledgements
 
 * This project uses several code snippets from the [Google I/O Android app](https://github.com/google/iosched), including [BezelImageView](navdrawer/src/main/java/google/samples/apps/iosched/ui/widget/BezelImageView.java) and [ScrimInsetsScrollView](navdrawer/src/main/java/google/samples/apps/iosched/ui/widget/ScrimInsetsScrollView.java).

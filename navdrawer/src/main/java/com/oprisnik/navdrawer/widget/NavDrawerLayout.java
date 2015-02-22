@@ -18,6 +18,7 @@ package com.oprisnik.navdrawer.widget;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
@@ -77,6 +78,11 @@ public class NavDrawerLayout extends DrawerLayout {
     private NavDrawerDataProvider mDataProvider;
 
     private NavigationListener mNavigationListener = null;
+    
+    private boolean mHasHeader = true;
+    
+    @LayoutRes
+    private int mHeaderLayoutRes = NAVDRAWER_DEFAULT_HEADER_LAYOUT;
 
     private NavigationListener mInternalListener = new NavigationListener() {
         @Override
@@ -138,6 +144,17 @@ public class NavDrawerLayout extends DrawerLayout {
 
         int color = Utils.getAttrColor(R.attr.colorPrimaryDark, context);
         setStatusBarBackgroundColor(color);
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.NavDrawerLayout,
+                defStyle, 0);
+        try {
+            mHasHeader = a.getBoolean(R.styleable.NavDrawerLayout_hasHeader, mHasHeader);
+            mHeaderLayoutRes = a.getResourceId(R.styleable.NavDrawerLayout_headerLayout, mHeaderLayoutRes); 
+        } finally {
+            a.recycle();
+        }
     }
 
     public void fadeOutContent() {
@@ -160,12 +177,16 @@ public class NavDrawerLayout extends DrawerLayout {
 
     @Override
     protected void onFinishInflate() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
         // we add the nav drawer
-        mNavdrawer = (ViewGroup) LayoutInflater.from(getContext()).inflate(NAVDRAWER_LAYOUT, this, false);
+        mNavdrawer = (ViewGroup) inflater.inflate(NAVDRAWER_LAYOUT, this, false);
         if (mNavdrawer != null) {
             addView(mNavdrawer);
             mDrawerItemsListContainer = (ViewGroup) mNavdrawer.findViewById(android.R.id.list);
-            mHeader = mNavdrawer.findViewById(R.id.navdrawer_header);
+            if (mHasHeader) {
+                mHeader = inflater.inflate(mHeaderLayoutRes, mNavdrawer, false);
+                setHeader(mHeader);
+            }
             if (mHeader != null) {
                 mHeader.setOnClickListener(mHeaderClickListener);
             }
@@ -254,7 +275,10 @@ public class NavDrawerLayout extends DrawerLayout {
             }
             mHeader = header;
             if (mHeader != null) {
+                mHasHeader = true;
                 contentHolder.addView(mHeader, 0);
+            } else {
+                mHasHeader = false;
             }
         }
     }

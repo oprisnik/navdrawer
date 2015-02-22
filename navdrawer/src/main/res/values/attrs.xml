@@ -17,6 +17,12 @@
 
 <resources>
 
+    
+    <declare-styleable name="NavDrawerLayout">
+        <attr name="headerLayout" format="reference" />
+        <attr name="hasHeader" format="boolean" />
+    </declare-styleable>
+
     <!-- google.samples.apps.iosched.ui.widget.ScrimInsetsScrollView -->
     <declare-styleable name="ScrimInsetsView">
         <attr name="insetForeground" format="reference|color"/>

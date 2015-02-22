@@ -50,7 +50,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
 
-version = '1.0.0'
+version = '1.0.1'
 group = 'com.oprisnik'
 def libName = 'navdrawer'
 def githubUrl = 'https://github.com/oprisnik/navdrawer'
