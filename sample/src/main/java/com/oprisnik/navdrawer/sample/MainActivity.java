@@ -16,6 +16,8 @@
 
 package com.oprisnik.navdrawer.sample;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -38,6 +40,12 @@ import java.util.List;
 public class MainActivity extends NavDrawerActivity {
 
     private static final List<NavDrawerEntry> NAV_ITEMS = new ArrayList<NavDrawerEntry>();
+
+    private static final NavDrawerEntry ENTRY_MORE_APPS = new NavDrawerEntry.Builder()
+            .setTitleResId(R.string.more_apps)
+            .setIconResId(R.drawable.abc_ic_search_api_mtrl_alpha)
+            .setExternal(true)
+            .build();
 
     static {
         // First section
@@ -63,6 +71,8 @@ public class MainActivity extends NavDrawerActivity {
                 .setIconResId(R.drawable.abc_ic_menu_cut_mtrl_alpha)
                 .setSelectedColorRes(R.color.accent)
                 .build());
+
+        NAV_ITEMS.add(ENTRY_MORE_APPS);
 
 
         NAV_ITEMS.add(new NavDrawerDivider());
@@ -144,9 +154,15 @@ public class MainActivity extends NavDrawerActivity {
 
     @Override
     public void onEntrySelected(NavDrawerEntry entry) {
-        mSelected = entry;
-        update(mSelected);
-        Toast.makeText(this, entry.getTitleResId(), Toast.LENGTH_SHORT).show();
+        if (entry == ENTRY_MORE_APPS) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://search?q=pub:Alexander Oprisnik"));
+            startActivity(intent);
+        } else {
+            mSelected = entry;
+            update(mSelected);
+            Toast.makeText(this, entry.getTitleResId(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

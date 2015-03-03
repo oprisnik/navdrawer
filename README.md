@@ -28,11 +28,12 @@ A small sample application can be found [here](sample).
 
 ## Usage
 
+This library is available on jCenter.
 Just add the following dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-  compile 'com.oprisnik:navdrawer:1.0.1'
+  compile 'com.oprisnik:navdrawer:1.0.2'
 }
 ```
 
@@ -82,6 +83,14 @@ NavDrawerEntry e = new NavDrawerEntry.Builder()
                           .setSelectedColorRes(R.color.my_color)
                           .build();
 ```
+
+If your navigation drawer entry performs an external call (where the entry should NOT be highlighted once clicked),
+add `.setExternal(true)` to your builder.
+This will prevent the navigation drawer entry from being selected.
+
+The click action of navigation drawer entries is delayed per default until the navigation drawer animation
+is finished.
+If you want to be notified instantly, you can add `.setLaunchDelayed(false)` to your builder.
 
 ### Header
 
@@ -146,7 +155,7 @@ Example application theme:
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
   <item name="colorPrimary">@color/primary</item>
   <item name="colorPrimaryDark">@color/primary_dark</item>
-  
+
   <!-- You need to set the status bar color to transparent!-->
   <!-- It will be automatically colored according to colorPrimaryDark! -->
   <item name="android:statusBarColor">@android:color/transparent</item>

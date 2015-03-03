@@ -98,12 +98,15 @@ public class NavDrawerLayout extends DrawerLayout {
                         notifyListeners(entry);
                     }
                 }, NAVDRAWER_LAUNCH_DELAY);
+            } else {
+                notifyListeners(entry);
+            }
+            // check if we have an external entry and update the selected item accordingly
+            if (!entry.isExternal()) {
                 // set the selected item correctly
                 for (NavDrawerEntry e : mEntryList) {
                     e.formatView(getContext(), mEntryMap.get(e), e.equals(entry));
                 }
-            } else {
-                notifyListeners(entry);
             }
             if (entry.fadeOutContent()) {
                 fadeOutContent();

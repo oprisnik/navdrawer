@@ -33,6 +33,9 @@ import android.widget.TextView;
 import com.oprisnik.navdrawer.R;
 import com.oprisnik.navdrawer.widget.NavDrawerLayout;
 
+/**
+ * Navigation drawer entry.
+ */
 public class NavDrawerEntry {
 
     public static final int DEFAULT_LAYOUT_RES_ID = R.layout.navdrawer_item;
@@ -40,6 +43,7 @@ public class NavDrawerEntry {
     protected static final boolean DEFAULT_CLICKABLE = true;
     protected static final boolean DEFAULT_LAUNCH_DELAYED = true;
     protected static final boolean DEFAULT_FADE_OUT_CONTENT = false;
+    protected static final boolean DEFAULT_IS_EXTERNAL = false;
 
     @StringRes
     private int mTitleResId;
@@ -60,6 +64,8 @@ public class NavDrawerEntry {
     private boolean mLaunchDelayed = DEFAULT_LAUNCH_DELAYED;
 
     private boolean mIsClickable = DEFAULT_CLICKABLE;
+    
+    private boolean mIsExternal = DEFAULT_IS_EXTERNAL;
 
 
     public NavDrawerEntry(@StringRes int titleResId, @DrawableRes int iconResId) {
@@ -187,6 +193,14 @@ public class NavDrawerEntry {
         return mHasCustomColor;
     }
 
+    public boolean isExternal() {
+        return mIsExternal;
+    }
+
+    public void setExternal(boolean isExternal) {
+        mIsExternal = isExternal;
+    }
+
     public static class Builder {
 
         @StringRes
@@ -208,46 +222,113 @@ public class NavDrawerEntry {
         private boolean mLaunchDelayed = DEFAULT_LAUNCH_DELAYED;
 
         private boolean mIsClickable = DEFAULT_CLICKABLE;
+        
+        private boolean mIsExternal = DEFAULT_IS_EXTERNAL;
 
         public Builder() {
         }
 
+        /**
+         * Set a custom layout resource ID for the navigation drawer entry.
+         *  
+         * @param layoutResId the custom layout resource ID
+         * @return the builder
+         */
         public Builder setLayoutResId(@LayoutRes int layoutResId) {
             mLayoutResId = layoutResId;
             return this;
         }
 
+        /**
+         * Set the icon of the navigation drawer entry.
+         *  
+         * @param iconResId the icon resource ID to use
+         * @return the builder
+         */
         public Builder setIconResId(@DrawableRes int iconResId) {
             mIconResId = iconResId;
             return this;
         }
 
+        /**
+         * Set the title of the navigation drawer entry.
+         *
+         * @param titleResId the string resource ID to use
+         * @return the builder
+         */
         public Builder setTitleResId(@StringRes int titleResId) {
             mTitleResId = titleResId;
             return this;
         }
-
+        
+        /**
+         * Set a custom selected color (text color of the selected navigation drawer entry).
+         *
+         * @param selectedColorRes the color resource ID to use
+         * @return the builder
+         */
         public Builder setSelectedColorRes(@ColorRes int selectedColorRes) {
             mSelectedColorRes = selectedColorRes;
             mHasCustomColor = true;
             return this;
         }
-
+        
+        /**
+         * Specify whether the main content should be faded out when the entry is selected.
+         *
+         * @param fadeOutContent true if the content should be faded out
+         * @return the builder
+         */
         public Builder setFadeOutContent(boolean fadeOutContent) {
             mFadeOutContent = fadeOutContent;
             return this;
         }
-
+        
+        /**
+         * Specify whether the click action should be delayed.
+         * If set to true (default), the click action will be delayed until the navigation drawer
+         * closing animation is done. 
+         *
+         * @param launchDelayed true if the action should be delayed
+         * @return the builder
+         */
         public Builder setLaunchDelayed(boolean launchDelayed) {
             mLaunchDelayed = launchDelayed;
             return this;
         }
-
+        
+        /**
+         * Specify whether the navigation drawer entry is clickable.
+         * For example, subheaders are not clickable, normal entries are. 
+         *
+         * @param isClickable true if the entry is clickable
+         * @return the builder
+         */
         public Builder setClickable(boolean isClickable) {
             mIsClickable = isClickable;
             return this;
         }
+        
+        /**
+         * Specify whether the navigation drawer entry performs an external call.
+         * If set to true, the entry will not be selected when it is clicked.
+         * For example, if you launch an external activity, you can set external to true.
+         * Then, once the entry is selected, the new activity can be started. When the user
+         * returns to your activity, this entry will not be selected. 
+         *
+         * @param isExternal true if the entry should not be highlighted
+         * @return the builder
+         */
+        public Builder setExternal(boolean isExternal) {
+            mIsExternal = isExternal;
+            return this;
+        }
 
+        /**
+         * Build the navigation drawer entry.
+         *
+         * @return the navigation drawer entry
+         */
         public NavDrawerEntry build() {
             NavDrawerEntry entry = new NavDrawerEntry();
             entry.mLayoutResId = mLayoutResId;
@@ -258,6 +339,7 @@ public class NavDrawerEntry {
             entry.mHasCustomColor = mHasCustomColor;
             entry.mLaunchDelayed = mLaunchDelayed;
             entry.mIsClickable = mIsClickable;
+            entry.mIsExternal = mIsExternal;
             return entry;
         }
     }
