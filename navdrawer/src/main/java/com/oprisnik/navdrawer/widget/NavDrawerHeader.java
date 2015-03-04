@@ -29,9 +29,9 @@ import com.oprisnik.navdrawer.R;
 
 public class NavDrawerHeader extends FrameLayout {
 
-    private String mTitle = null;
-    private String mSubtitle = null;
-    private Drawable mIcon = null;
+    private String mTitle;
+    private String mSubtitle;
+    private Drawable mIcon;
 
     private TextView mTitleText;
     private TextView mSubtitleText;

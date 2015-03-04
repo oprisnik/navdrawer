@@ -37,9 +37,9 @@ public abstract class NavDrawerActivity extends ActionBarActivity implements Nav
 
     protected static final TypeEvaluator ARGB_EVALUATOR = new ArgbEvaluator();
 
-    private NavDrawerLayout mDrawerLayout = null;
+    private NavDrawerLayout mDrawerLayout;
 
-    private ValueAnimator mStatusBarColorAnimator = null;
+    private ValueAnimator mStatusBarColorAnimator;
 
     protected boolean mUpNavigation = true;
 

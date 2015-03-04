@@ -70,14 +70,14 @@ public class NavDrawerLayout extends DrawerLayout {
     private List<NavDrawerEntry> mEntryList;
     private Map<NavDrawerEntry, View> mEntryMap;
 
-    private ViewGroup mNavdrawer = null;
-    private ViewGroup mDrawerItemsListContainer = null;
+    private ViewGroup mNavdrawer;
+    private ViewGroup mDrawerItemsListContainer;
 
-    private View mHeader = null;
+    private View mHeader;
 
     private NavDrawerDataProvider mDataProvider;
 
-    private NavigationListener mNavigationListener = null;
+    private NavigationListener mNavigationListener;
     
     private boolean mHasHeader = true;
     
