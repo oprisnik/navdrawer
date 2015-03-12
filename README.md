@@ -33,7 +33,7 @@ Just add the following dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-  compile 'com.oprisnik:navdrawer:1.0.2'
+  compile 'com.oprisnik:navdrawer:1.0.3'
 }
 ```
 

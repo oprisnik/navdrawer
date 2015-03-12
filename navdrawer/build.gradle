@@ -16,8 +16,7 @@
 
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'bintray-release'
 
 android {
     compileSdkVersion 22
@@ -50,68 +49,33 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
 }
 
-version = '1.0.2'
-group = 'com.oprisnik'
-def libName = 'navdrawer'
-def githubUrl = 'https://github.com/oprisnik/navdrawer'
-def developerId = 'oprisnik'
-def developerName = 'Alexander Oprisnik'
-def bintrayRepo = 'maven'
+//version = '1.0.3'
+//group = 'com.oprisnik'
+//def libName = 'navdrawer'
+//def githubUrl = 'https://github.com/oprisnik/navdrawer'
+//def developerId = 'oprisnik'
+//def developerName = 'Alexander Oprisnik'
+//def bintrayRepo = 'maven'
 
+publish {
+    userOrg = 'oprisnik'
+    groupId = 'com.oprisnik'
+    artifactId = 'navdrawer'
+    version = '1.0.3'
+    description = 'Android navigation drawer library'
+    website = 'https://github.com/oprisnik/navdrawer'
 
-bintray {
+    dryRun = true
+
     def Properties props = new Properties()
     def File file = file("../local.properties")
     if (file.exists()) {
+        println 'local.properties found!'
         props.load(new FileInputStream(file))
-        user = props['bintrayUser']
-        key = props['bintrayApiKey']
+        bintrayUser = props['bintrayUser']
+        bintrayKey = props['bintrayApiKey']
     } else {
         println 'local.properties not found! No bintray user / key set!'
-    }
-
-    configurations = ['archives']
-//    dryRun = false
-//    publish = true
-    pkg {
-        repo = bintrayRepo
-        name = libName
-        desc = 'Android navigation drawer library'
-        websiteUrl = githubUrl
-        issueTrackerUrl = githubUrl+'/issues'
-        vcsUrl = githubUrl + '.git'
-        licenses = ['Apache-2.0']
-        publicDownloadNumbers = true
-    }
-
-}
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                name libName
-                url githubUrl
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id developerId
-                        name developerName
-                    }
-                }
-                scm {
-                    connection githubUrl+'.git'
-                    developerConnection githubUrl+'.git'
-                    url githubUrl+'.git'
-                }
-            }
-        }
     }
 }
 
@@ -120,12 +84,12 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-// TODO: Javadoc not working
+//// TODO: Javadoc not working
 //task javadoc(type: Javadoc) {
 //    source = android.sourceSets.main.java.srcDirs
 //    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 //}
-
+//
 //task javadocJar(type: Jar, dependsOn: javadoc) {
 //    classifier = 'javadoc'
 //    from javadoc.destinationDir
@@ -134,9 +98,4 @@ task sourcesJar(type: Jar) {
 artifacts {
 //    archives javadocJar
     archives sourcesJar
-}
-
-
-task findConventions << {
-    println project.getConvention()
 }
