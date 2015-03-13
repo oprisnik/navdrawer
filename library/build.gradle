@@ -49,14 +49,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
 }
 
-//version = '1.0.3'
-//group = 'com.oprisnik'
-//def libName = 'navdrawer'
-//def githubUrl = 'https://github.com/oprisnik/navdrawer'
-//def developerId = 'oprisnik'
-//def developerName = 'Alexander Oprisnik'
-//def bintrayRepo = 'maven'
-
 publish {
     userOrg = 'oprisnik'
     groupId = 'com.oprisnik'
@@ -77,25 +69,4 @@ publish {
     } else {
         println 'local.properties not found! No bintray user / key set!'
     }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-//// TODO: Javadoc not working
-//task javadoc(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//}
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-
-artifacts {
-//    archives javadocJar
-    archives sourcesJar
 }
