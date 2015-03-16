@@ -25,4 +25,9 @@ public class NavDrawerSettingsEntry extends NavDrawerEntry {
     public NavDrawerSettingsEntry(@StringRes int settingsStringRes) {
         super(settingsStringRes, R.drawable.ic_settings_black_24dp);
     }
+
+    public NavDrawerSettingsEntry(@StringRes int settingsStringRes, boolean isExternal) {
+        this(settingsStringRes);
+        setExternal(true);
+    }
 }
