@@ -40,10 +40,28 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    signingConfigs {
+        release {
+            def Properties properties = new Properties()
+            def propFile = file('../distribution/signing.properties')
+            if (propFile.canRead()) {
+                properties.load(new FileInputStream(propFile))
+                storeFile file(properties['keystore'])
+                storePassword properties['keystore.password']
+                keyAlias properties['keyAlias']
+                keyPassword properties['keyPassword']
+            } else {
+                println 'Error: could not find ../distribution/signing.properties - using default values!'
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

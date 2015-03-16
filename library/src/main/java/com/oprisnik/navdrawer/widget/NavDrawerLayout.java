@@ -274,7 +274,6 @@ public class NavDrawerLayout extends DrawerLayout {
             if (mHeader != null) {
                 // replace the header
                 contentHolder.removeView(mHeader);
-                mHeader = null;
             }
             mHeader = header;
             if (mHeader != null) {
