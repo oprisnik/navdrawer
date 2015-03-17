@@ -101,8 +101,8 @@ public class NavDrawerLayout extends DrawerLayout {
             } else {
                 notifyListeners(entry);
             }
-            // check if we have an external entry and update the selected item accordingly
-            if (!entry.isExternal()) {
+            // check if we should select the current entry
+            if (entry.selectOnClick()) {
                 // set the selected item correctly
                 for (NavDrawerEntry e : mEntryList) {
                     e.formatView(getContext(), mEntryMap.get(e), e.equals(entry));

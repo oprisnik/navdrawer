@@ -26,8 +26,8 @@ public class NavDrawerSupportEntry extends NavDrawerEntry {
         super(supportStringRes, R.drawable.ic_help_black_24dp);
     }
 
-    public NavDrawerSupportEntry(@StringRes int supportStringRes, boolean isExternal) {
+    public NavDrawerSupportEntry(@StringRes int supportStringRes, boolean selectOnClick) {
         this(supportStringRes);
-        setExternal(isExternal);
+        setSelectOnClick(selectOnClick);
     }
 }

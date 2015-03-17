@@ -53,7 +53,7 @@ publish {
     userOrg = 'oprisnik'
     groupId = 'com.oprisnik'
     artifactId = 'navdrawer'
-    version = '1.0.3'
+    version = '1.0.4'
     description = 'Android navigation drawer library'
     website = 'https://github.com/oprisnik/navdrawer'
 

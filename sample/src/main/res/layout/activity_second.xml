@@ -42,38 +42,8 @@
             android:layout_width="match_parent"
             android:padding="@dimen/padding"
             android:layout_height="wrap_content"
-            android:text="Here comes your content!"/>
-
-        <TextView
-            android:id="@+id/selected"
-            android:layout_width="match_parent"
-            android:padding="@dimen/padding"
-            android:layout_height="wrap_content"
-            tools:text="Selected: Section 1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Custom header"
-            android:id="@+id/button"
-            android:onClick="setCustomHeader"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default header"
-            android:id="@+id/button2"
-            android:onClick="setDefaultHeader"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remove header"
-            android:id="@+id/button3"
-            android:onClick="removeHeader"
-            android:layout_gravity="center_horizontal"/>
+            style="@style/TextAppearance.AppCompat.Title"
+            android:text="This is a second activity!"/>
     </LinearLayout>
 
 </com.oprisnik.navdrawer.widget.NavDrawerLayout>

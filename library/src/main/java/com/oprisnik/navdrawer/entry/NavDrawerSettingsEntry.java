@@ -26,8 +26,8 @@ public class NavDrawerSettingsEntry extends NavDrawerEntry {
         super(settingsStringRes, R.drawable.ic_settings_black_24dp);
     }
 
-    public NavDrawerSettingsEntry(@StringRes int settingsStringRes, boolean isExternal) {
+    public NavDrawerSettingsEntry(@StringRes int settingsStringRes, boolean selectOnClick) {
         this(settingsStringRes);
-        setExternal(isExternal);
+        setSelectOnClick(selectOnClick);
     }
 }

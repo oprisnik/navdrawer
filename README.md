@@ -41,12 +41,14 @@ dependencies {
 
 Declare `com.oprisnik.navdrawer.widget.NavDrawerLayout` as the root element of your layout file.
 Add your content as a child of the `NavDrawerLayout`.
+Don't forget to give your navigation drawer layout an ID so that the view state can be saved / restored properly.
 
 Example `activity.xml`:
 
 ```xml
 <com.oprisnik.navdrawer.widget.NavDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navigation_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">

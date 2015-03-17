@@ -43,7 +43,7 @@ public class NavDrawerEntry {
     protected static final boolean DEFAULT_CLICKABLE = true;
     protected static final boolean DEFAULT_LAUNCH_DELAYED = true;
     protected static final boolean DEFAULT_FADE_OUT_CONTENT = false;
-    protected static final boolean DEFAULT_IS_EXTERNAL = false;
+    protected static final boolean DEFAULT_SELECT_ON_CLICK = true;
 
     @StringRes
     private int mTitleResId;
@@ -65,7 +65,7 @@ public class NavDrawerEntry {
 
     private boolean mIsClickable = DEFAULT_CLICKABLE;
     
-    private boolean mIsExternal = DEFAULT_IS_EXTERNAL;
+    private boolean mSelectOnClick = DEFAULT_SELECT_ON_CLICK;
 
 
     public NavDrawerEntry(@StringRes int titleResId, @DrawableRes int iconResId) {
@@ -193,12 +193,12 @@ public class NavDrawerEntry {
         return mHasCustomColor;
     }
 
-    public boolean isExternal() {
-        return mIsExternal;
+    public boolean selectOnClick() {
+        return mSelectOnClick;
     }
 
-    public void setExternal(boolean isExternal) {
-        mIsExternal = isExternal;
+    public void setSelectOnClick(boolean isExternal) {
+        mSelectOnClick = isExternal;
     }
 
     public static class Builder {
@@ -223,7 +223,7 @@ public class NavDrawerEntry {
 
         private boolean mIsClickable = DEFAULT_CLICKABLE;
         
-        private boolean mIsExternal = DEFAULT_IS_EXTERNAL;
+        private boolean mSelectOnClick = DEFAULT_SELECT_ON_CLICK;
 
         public Builder() {
         }
@@ -310,17 +310,18 @@ public class NavDrawerEntry {
         }
         
         /**
-         * Specify whether the navigation drawer entry performs an external call.
-         * If set to true, the entry will not be selected when it is clicked.
-         * For example, if you launch an external activity, you can set external to true.
+         * Specify whether the navigation drawer entry should be selected on click.
+         * If set to true, the entry will be selected when it is clicked.
+         * For example, if you launch an external activity or if your entry displays
+         * a toast / dialog, you can setSelectOnClick to false.
          * Then, once the entry is selected, the new activity can be started. When the user
          * returns to your activity, this entry will not be selected. 
          *
-         * @param isExternal true if the entry should not be highlighted
+         * @param selectOnClick false if the entry should not be highlighted on click
          * @return the builder
          */
-        public Builder setExternal(boolean isExternal) {
-            mIsExternal = isExternal;
+        public Builder setSelectOnClick(boolean selectOnClick) {
+            mSelectOnClick = selectOnClick;
             return this;
         }
 
@@ -339,7 +340,7 @@ public class NavDrawerEntry {
             entry.mHasCustomColor = mHasCustomColor;
             entry.mLaunchDelayed = mLaunchDelayed;
             entry.mIsClickable = mIsClickable;
-            entry.mIsExternal = mIsExternal;
+            entry.mSelectOnClick = mSelectOnClick;
             return entry;
         }
     }

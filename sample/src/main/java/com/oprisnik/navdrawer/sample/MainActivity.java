@@ -16,82 +16,29 @@
 
 package com.oprisnik.navdrawer.sample;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oprisnik.navdrawer.NavDrawerActivity;
-import com.oprisnik.navdrawer.entry.NavDrawerDivider;
-import com.oprisnik.navdrawer.entry.NavDrawerDividerBeforeSubheader;
 import com.oprisnik.navdrawer.entry.NavDrawerEntry;
-import com.oprisnik.navdrawer.entry.NavDrawerSettingsEntry;
-import com.oprisnik.navdrawer.entry.NavDrawerSubheader;
-import com.oprisnik.navdrawer.entry.NavDrawerSupportEntry;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainActivity extends DemoDrawerActivity {
 
-
-public class MainActivity extends NavDrawerActivity {
-
-    private static final List<NavDrawerEntry> NAV_ITEMS = new ArrayList<NavDrawerEntry>();
-
-    private static final NavDrawerEntry ENTRY_MORE_APPS = new NavDrawerEntry.Builder()
-            .setTitleResId(R.string.more_apps)
-            .setIconResId(R.drawable.abc_ic_search_api_mtrl_alpha)
-            .setExternal(true)
-            .build();
-
-    static {
-        // First section
-        NAV_ITEMS.add(new NavDrawerSubheader(R.string.title_section1));
-
-        // Simple entry
-        NAV_ITEMS.add(new NavDrawerEntry(R.string.title_entry_1, R.drawable.abc_ic_menu_selectall_mtrl_alpha));
-
-        // Using Builder
-        NAV_ITEMS.add(new NavDrawerEntry.Builder()
-                .setTitleResId(R.string.title_entry_2)
-                .setIconResId(R.drawable.abc_ic_menu_copy_mtrl_am_alpha)
-                .build());
-
-        // Second section
-        // We need to use NavDrawerDividerBeforeSubheader because of different spacing
-        NAV_ITEMS.add(new NavDrawerDividerBeforeSubheader());
-        NAV_ITEMS.add(new NavDrawerSubheader(R.string.title_section2));
-
-        // Custom highlight color
-        NAV_ITEMS.add(new NavDrawerEntry.Builder()
-                .setTitleResId(R.string.title_entry_3)
-                .setIconResId(R.drawable.abc_ic_menu_cut_mtrl_alpha)
-                .setSelectedColorRes(R.color.accent)
-                .build());
-
-        NAV_ITEMS.add(ENTRY_MORE_APPS);
-
-
-        NAV_ITEMS.add(new NavDrawerDivider());
-
-        // Settings entry
-        NAV_ITEMS.add(new NavDrawerSettingsEntry(R.string.title_settings));
-        // Support entry
-        NAV_ITEMS.add(new NavDrawerSupportEntry(R.string.title_support));
-    }
-
-    private NavDrawerEntry mSelected = NAV_ITEMS.get(1);
+    private NavDrawerEntry mSelected = ENTRY1;
 
     private TextView mSelectedText;
 
+    public static final String KEY_ENTRY = "entry_index";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        overridePendingTransition(0, 0);
 
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (tb != null) {
@@ -100,51 +47,55 @@ public class MainActivity extends NavDrawerActivity {
 
         mSelectedText = (TextView) findViewById(R.id.selected);
 
-        Button custom = (Button) findViewById(R.id.button);
-        custom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDrawerLayout().setHeader(R.layout.custom_header);
-                ((Button) getDrawerLayout().getHeader().findViewById(R.id.custom_header_btn)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "Custom header button clicked!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        Button defaultBtn = (Button) findViewById(R.id.button2);
-        defaultBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDrawerLayout().setDefaultHeader();
-                updateHeaderInfo();
-            }
-        });
-
-        Button removeBtn = (Button) findViewById(R.id.button3);
-        removeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDrawerLayout().removeHeader();
-            }
-        });
+        if (savedInstanceState != null) {
+            int index = savedInstanceState.getInt(KEY_ENTRY, 0);
+            updateEntry(index);
+        } else if (getIntent() != null && getIntent().hasExtra(KEY_ENTRY)) {
+            int index = getIntent().getIntExtra(KEY_ENTRY, 0);
+            updateEntry(index);
+        }
 
         // we do not want the up arrow (<-) here
         showUpNavigation(false);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    public void setCustomHeader(View view) {
+        getDrawerLayout().setHeader(R.layout.custom_header);
+        getDrawerLayout().getHeader().findViewById(R.id.custom_header_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Custom header button clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setDefaultHeader(View view) {
+        getDrawerLayout().setDefaultHeader();
         updateHeaderInfo();
-        update(mSelected);
+    }
+
+    public void removeHeader(View view) {
+        getDrawerLayout().removeHeader();
     }
 
     @Override
-    public List<NavDrawerEntry> getNavDrawerItems() {
-        return NAV_ITEMS;
+    protected void onResume() {
+        super.onResume();
+        updateText();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_ENTRY, ENTRY1.equals(mSelected) ? 0 : 1);
+    }
+
+    protected void updateEntry(int index) {
+        if (index == 0) {
+            mSelected = ENTRY1;
+        } else {
+            mSelected = ENTRY2;
+        }
     }
 
     @Override
@@ -154,33 +105,19 @@ public class MainActivity extends NavDrawerActivity {
 
     @Override
     public void onEntrySelected(NavDrawerEntry entry) {
-        if (entry == ENTRY_MORE_APPS) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://search?q=pub:Alexander Oprisnik"));
-            startActivity(intent);
-        } else {
+        // special behavior for entry1 and entry2 -> we don't switch the activity, we only change the text
+        if (ENTRY1.equals(entry) || ENTRY2.equals(entry)) {
             mSelected = entry;
-            update(mSelected);
-            Toast.makeText(this, entry.getTitleResId(), Toast.LENGTH_SHORT).show();
+            updateText();
+        } else {
+            super.onEntrySelected(entry);
         }
     }
 
-    @Override
-    public void onHeaderClicked() {
-        Toast.makeText(this, "Header clicked!", Toast.LENGTH_SHORT).show();
-    }
-
-    protected void updateHeaderInfo() {
-        getDrawerLayout().setHeaderTitle("Jonathan Lee");
-        getDrawerLayout().setHeaderSubtitle("heyfromjonathan@gmail.com");
-//        getDrawerLayout().setHeaderIcon(getResources().getDrawable(R.drawable.ic_launcher));
-        getDrawerLayout().setHeaderBackgroundColor(getResources().getColor(R.color.primary));
-    }
-
-    protected void update(NavDrawerEntry active) {
+    protected void updateText() {
         // we just update our TextView
-        if (mSelectedText != null && active != null) {
-            mSelectedText.setText(getString(R.string.selected, getString(active.getTitleResId())));
+        if (mSelectedText != null && mSelected != null) {
+            mSelectedText.setText(getString(R.string.selected, getString(mSelected.getTitleResId())));
         }
     }
 }
