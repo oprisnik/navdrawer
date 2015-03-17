@@ -28,6 +28,6 @@ public class NavDrawerSettingsEntry extends NavDrawerEntry {
 
     public NavDrawerSettingsEntry(@StringRes int settingsStringRes, boolean isExternal) {
         this(settingsStringRes);
-        setExternal(true);
+        setExternal(isExternal);
     }
 }

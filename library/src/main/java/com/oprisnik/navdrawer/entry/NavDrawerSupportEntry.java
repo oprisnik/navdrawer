@@ -28,6 +28,6 @@ public class NavDrawerSupportEntry extends NavDrawerEntry {
 
     public NavDrawerSupportEntry(@StringRes int supportStringRes, boolean isExternal) {
         this(supportStringRes);
-        setExternal(true);
+        setExternal(isExternal);
     }
 }
