@@ -33,7 +33,7 @@ Just add the following dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-  compile 'com.oprisnik:navdrawer:1.0.3'
+  compile 'com.oprisnik:navdrawer:1.0.4'
 }
 ```
 
@@ -62,7 +62,15 @@ Example `activity.xml`:
 ```
 
 Then, let your Activity extend `com.oprisnik.navdrawer.NavDrawerActivity` and implement the required methods.
+
+In [DemoDrawerActivity.java](sample/src/main/java/com/oprisnik/navdrawer/sample/DemoDrawerActivity.java)
+you can find a simple example for a basic abstract navigation drawer activity.
+[SecondActivity.java](sample/src/main/java/com/oprisnik/navdrawer/sample/SecondActivity.java) and
+[MainActivity.java](sample/src/main/java/com/oprisnik/navdrawer/sample/MainActivity.java))
+show how different navigation drawer sections look like.
+
 If you do not want to extend `NavDrawerActivity`, you can also take a look at [NavDrawerActivity.java](navdrawer/src/main/java/com/oprisnik/navdrawer/NavDrawerActivity.java) and add a similar logic to your Activity.
+
 
 ### Navigation drawer structure
 
