@@ -25,6 +25,10 @@ Simple navigation drawer library for Android applications.
 
 A small sample application can be found [here](sample).
 
+The sample app is also on Google Play:
+
+[![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.oprisnik.navdrawer.sample)
+
 
 ## Usage
 
